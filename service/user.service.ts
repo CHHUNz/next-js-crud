@@ -22,7 +22,7 @@ async function updateUser(requestBody: any, id:any){
 }
 
 async function deleteUser(id:any){
-    const API = ServiceId.USER+ `/${id}`;
+    const API = ServiceId.USER + `/${id}`;
     return await http.delete(API).catch(err=> err)
 }
 export const userService = {
