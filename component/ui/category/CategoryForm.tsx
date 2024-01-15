@@ -10,6 +10,15 @@ export default function CategoryForm() {
     const query = useQueryClient()
     const {open, setOpen, isUpdate, updateData} = useUserStore();
     const [category, setCategory] = useState(updateData?.name || "");
+
+    // const mutationCreate = useMutation({
+    //     mutationFn: categoryService.createCategory,
+    //     onSuccess: ()=> {
+    //         setOpen(false)
+    //         query.invalidateQueries({queryKey:["categories"]})
+    //     }
+    // })
+
     const handleSubmit = async () => {
         const body = {
             "name": category
@@ -24,19 +33,14 @@ export default function CategoryForm() {
             return;
         }
 
+        // await mutationCreate.mutateAsync(body);
         const response = await categoryService.createCategory(body);
         if ((response?.status == 200)){
             setOpen(false)
             query.invalidateQueries({queryKey:['categories']})
         }
     }
-    // const mutation = useMutation({
-    //     mutationFn: categoryService.createCategory,
-    //     onSuccess: ()=> {
-    //         setOpen(false)
-    //         query.invalidateQueries({queryKey:["categories"]})
-    //     }
-    // })
+
     console.log(category)
     return (
         <>
